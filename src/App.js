@@ -4,8 +4,10 @@ import Resultado from './resultado.js';
 const request = require('request-promise');
 const convertir = require("./libraryCurrency.js");
 var conversion = function (moneda,monedaAConvertir,monedaBase) {
-  console.log("1 "+monedaBase+" equivale a "+moneda.conversion_rates[monedaAConvertir]+" "+monedaAConvertir);
-  this.state.print=true;   //por algun motivo esto hace q el print salga doble?
+  var conversionRates = moneda.conversion_rates[monedaAConvertir];
+  console.log("1 "+monedaBase+" equivale a "+conversionRates+" "+monedaAConvertir);
+  //this.state.print=true;   //por algun motivo esto hace q el print salga doble?
+  this.conversionRates=conversionRates;
 }
 
 class App extends React.Component{
@@ -16,7 +18,7 @@ class App extends React.Component{
     this.state = {
       monedaBase: "USD",
       monedaAConsultar: "ARS",
-      print: false
+      print: true
     }
     this.API = this.getAPI.bind(this);
     }
@@ -26,15 +28,14 @@ class App extends React.Component{
     .then((m) => {
       conversion(m,this.state.monedaAConsultar,this.state.monedaBase);
     }).catch((err) => {
-      console.log("no se encontro la moneda");
+      console.log(err);
     });
   }
 
   render(){ 
     let resultado;
-    if(this.state.print){
-      resultado =  <Resultado objeto={JSON.parse(this.state.objeto)} /> 
-    } 
+    resultado =  <Resultado conversionRates={this.state.conversionRates} monedaBase={this.state.monedaBase} monedaAConsultar={this.state.monedaAConsultar}/> 
+    console.log(this.state.conversionRates);
 
 
     return (

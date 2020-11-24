@@ -2,15 +2,10 @@ import React from "react";
 
 class Resultado extends React.Component {
 
-render(){
-    var objetoJson = this.props.objeto;
-    var arrayResultados = objetoJson.dataseries; 
-    var p = "";
-    /*var p = arrayResultados.map(datos => 
-        <p>1 {this.state.monedaBase} equivale a {datos.conversion_rates.monedaAConsultar} {datos.monedaAConsultar}s</p>
-        );*/
-return(p);
-}
+    render(){
+        console.log(this.props.conversionRates);
+        return <p>1 {this.props.monedaBase} equivale a {this.props.conversionRates} {this.props.monedaAConsultar}</p>
+    }
 
 }
 export default Resultado;
