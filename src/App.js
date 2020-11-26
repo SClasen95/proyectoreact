@@ -18,15 +18,26 @@ class App extends React.Component{
     this.state = {
       monedaBase: "USD",
       monedaAConsultar: "ARS",
-      print: true
+      print: true,
+      conversionRates: ""
     }
     this.API = this.getAPI.bind(this);
     }
     
+    conversion = function (moneda,monedaAConvertir,monedaBase) {
+      var conversionRates = moneda.conversion_rates[monedaAConvertir];
+      console.log("1 "+monedaBase+" equivale a "+conversionRates+" "+monedaAConvertir);
+      //this.state.print=true;   //por algun motivo esto hace q el print salga doble?
+      this.setState({
+        conversionRates:conversionRates
+      });
+    }
+    
+
   getAPI(){
     convertir(this.state.monedaBase)
     .then((m) => {
-      conversion(m,this.state.monedaAConsultar,this.state.monedaBase);
+      this.conversion(m,this.state.monedaAConsultar,this.state.monedaBase);
     }).catch((err) => {
       console.log(err);
     });
