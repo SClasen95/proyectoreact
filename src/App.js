@@ -3,12 +3,6 @@ import './App.css';
 import Resultado from './resultado.js';
 const request = require('request-promise');
 const convertir = require("./libraryCurrency.js");
-var conversion = function (moneda,monedaAConvertir,monedaBase) {
-  var conversionRates = moneda.conversion_rates[monedaAConvertir];
-  console.log("1 "+monedaBase+" equivale a "+conversionRates+" "+monedaAConvertir);
-  //this.state.print=true;   //por algun motivo esto hace q el print salga doble?
-  this.conversionRates=conversionRates;
-}
 
 class App extends React.Component{
 
